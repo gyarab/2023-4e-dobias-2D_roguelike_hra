@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkj5ayrcook1i"]
+
+[ext_resource type="Script" path="res://Scripts/Game_start.gd" id="1_oiq5c"]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(61, 19)
+
+[node name="Button" type="Button" parent="."]
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+script = ExtResource("1_oiq5c")
+metadata/_edit_use_anchors_ = true
