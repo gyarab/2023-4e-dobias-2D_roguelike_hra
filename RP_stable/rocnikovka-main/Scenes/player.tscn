@@ -11,8 +11,9 @@ size = Vector2(18, 26)
 size = Vector2(20, 28)
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 2
-collision_mask = 2
+y_sort_enabled = true
+collision_layer = 6
+collision_mask = 6
 script = ExtResource("1_0jjt7")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
@@ -20,6 +21,7 @@ position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_nqqvd")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
+z_index = 1
 texture = ExtResource("2_sv8ak")
 
 [node name="Camera2D2" type="Camera2D" parent="."]
@@ -32,6 +34,8 @@ position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_ixd5i")
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
+z_index = 100
+y_sort_enabled = true
 offset_left = -285.0
 offset_top = -159.0
 offset_right = -237.0
