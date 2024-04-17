@@ -1,6 +1,17 @@
-extends Node2D
+extends CharacterBody2D
 
-@onready var anim = $CharacterBody2D/AnimatedSprite2D
+var SPEED = 3
+var chase = false
+var player = null
 
-func _ready():
-	anim.play("move")
+func _physics_process(delta):
+	if chase:
+		position += (player.position - position).normalized() * SPEED
+		
+func _on_area_2d_body_entered(body):
+	player = body
+	chase = true
+
+func _on_area_2d_body_exited(body):
+	player = null
+	chase = false

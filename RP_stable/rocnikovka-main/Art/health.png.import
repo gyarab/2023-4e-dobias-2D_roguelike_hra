@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5e6eil73qv82"
-path="res://.godot/imported/office.png-71285050b4d5d6b3e1f62773db7e0d15.ctex"
+uid="uid://p8h5r1t8vnsk"
+path="res://.godot/imported/health.png-942461712cbe54362b370466095d69ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/office.png"
-dest_files=["res://.godot/imported/office.png-71285050b4d5d6b3e1f62773db7e0d15.ctex"]
+source_file="res://Art/health.png"
+dest_files=["res://.godot/imported/health.png-942461712cbe54362b370466095d69ee.ctex"]
 
 [params]
 

@@ -1,37 +1,25 @@
 extends CharacterBody2D
 
-@export var move_speed = 200.0
-@export var starting_direction: Vector2 = Vector2(0, 1)
+const SPEED = 300.0
+var health = 3
 
-@onready var animation_tree = $AnimationTree
-@onready var state_machine = animation_tree.get("parameters/playback")
-
-func _ready():
-	update_animation_parameters(starting_direction)
-	print(1)
+@onready var health_bar = $HealthBar
 
 func _physics_process(delta):
 	
+	if health == 0:
+		print("ded")
+	
 	var input_direction = Vector2(
-		Input.get_action_strength("right") - Input.get_action_strength("left"),
-		Input.get_action_strength("down") - Input.get_action_strength("up")
+		Input.get_action_strength("Right") - Input.get_action_strength("Left"),
+		Input.get_action_strength("Down") - Input.get_action_strength("Up")
 	)
 	
-	update_animation_parameters(input_direction)
-	
-	velocity = input_direction * move_speed
+	velocity = input_direction.normalized() * SPEED
 	
 	move_and_slide()
 	
-	pick_new_state()
+func _on_area_2d_body_entered(body):
+	health -= 1
+	health_bar.value = health * 33
 	
-func update_animation_parameters(move_input : Vector2):
-	if (move_input != Vector2.ZERO):
-		animation_tree.set("parameters/idle/blend_position", move_input)
-		animation_tree.set("parameters/run/blend_position", move_input)
-		
-func pick_new_state():
-	if(velocity == Vector2(0, 0)):
-		state_machine.travel("idle")
-	else:
-		state_machine.travel("run")
