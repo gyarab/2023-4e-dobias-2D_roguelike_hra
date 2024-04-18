@@ -4,6 +4,7 @@ const SPEED = 300.0
 var health = 3
 
 @onready var health_bar = $HealthBar
+@onready var animated_sprite = $AnimatedSprite2D
 
 func _physics_process(delta):
 	
@@ -18,6 +19,18 @@ func _physics_process(delta):
 	velocity = input_direction.normalized() * SPEED
 	
 	move_and_slide()
+	
+func _process(delta):
+	if Input.get_action_strength("Right"):
+		animated_sprite.play("walk_right")
+	elif Input.get_action_strength("Left"):
+		animated_sprite.play("walk_left")
+	elif Input.get_action_strength("Down"):
+		animated_sprite.play("walk_down")
+	elif Input.get_action_strength("Up"):
+		animated_sprite.play("walk_up")
+	else:
+		animated_sprite.play("idle")
 	
 func _on_area_2d_body_entered(body):
 	health -= 1

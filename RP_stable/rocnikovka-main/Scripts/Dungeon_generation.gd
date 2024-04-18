@@ -1,15 +1,8 @@
 extends Node2D
 
-var room_data = {
-	"standard": {"path": "std"},
-	"boss":{"path": "boss"}
-}
-
 var boss_room = "boss"
-var standard_rooms = {
-	#1: {"path": "res://Rooms/room.tscn"}
-}
-var start_room = "res://Scenes/start_room.tscn"
+var standard_rooms = {}
+var start_room = "res://Scenes/Rooms/Start_rooms/start_room.tscn"
 
 var dungeon = []
 var cors = Vector2i(0,0)
@@ -27,9 +20,10 @@ var num_enemies = 0
 
 func _ready():
 	load_rooms()
-	generate_dungeon(10)
+	generate_dungeon(40)
 	generate_rooms()
 	place_start()
+	
 func _physics_process(delta):
 	display_doors()
 	
@@ -41,27 +35,26 @@ func wait(sec):
 #function to load room scenes into array
 func load_rooms():
 	var file_num = 1
-	var dir = DirAccess.open("res://Rooms/")
+	var dir = DirAccess.open("res://Scenes/Rooms/Standard_rooms/")
 	if dir:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
 			if !dir.current_is_dir():
-				standard_rooms[file_num] = {"path": "res://Rooms/" + file_name}
+				standard_rooms[file_num] = {"path": "res://Scenes/Rooms/Standard_rooms/" + file_name}
 				file_num += 1
 			file_name = dir.get_next()
-	print(standard_rooms)
 	
 #function to generate grid representation of room layout
+#with higher numbers of rooms (>40) returns "Stack overflow (stack size: 1024). Check for infinite recursion in your script." a lot
 func generate_dungeon(num_rooms):
-	grid_size = ceil(num_rooms*0.66)
+	grid_size = ceil(num_rooms*0.5)
 	
 	#generate empty dungeon grid
 	for y in range(grid_size):
 		dungeon.append([])
 		for x in range(grid_size):
 			dungeon[y].append(0)
-	#print(dungeon)
 	
 	#add start room in the middle
 	dungeon[grid_size/2][grid_size/2] = 1
@@ -72,6 +65,9 @@ func generate_dungeon(num_rooms):
 	
 	#fill the empty grid with room structure
 	while rooms < num_rooms:
+		if !can_be_placed(dungeon, cors.x, cors.y-1, grid_size) and !can_be_placed(dungeon, cors.x, cors.y+1, grid_size) and !can_be_placed(dungeon, cors.x-1, cors.y, grid_size) and !can_be_placed(dungeon, cors.x+1, cors.y, grid_size):
+			dungeon = []
+			generate_dungeon(num_rooms)
 		var direction = randi_range(0, 3) #0=UP, 1=DOWN, 2=LEFT, 3=RIGHT
 		match direction:
 			0:
@@ -79,28 +75,21 @@ func generate_dungeon(num_rooms):
 					dungeon[cors.x][cors.y-1] = 1
 					cors.y -= 1
 					rooms += 1
-					#print("good Up")
 			1:
 				if can_be_placed(dungeon, cors.x, cors.y+1, grid_size):
 					dungeon[cors.x][cors.y+1] = 1
 					cors.y += 1
 					rooms += 1
-					#print("good Down")
 			2:
 				if can_be_placed(dungeon, cors.x-1, cors.y, grid_size):
 					dungeon[cors.x-1][cors.y] = 1
 					cors.x -= 1
 					rooms += 1
-					#print("good Left")
 			3:
 				if can_be_placed(dungeon, cors.x+1, cors.y, grid_size):
 					dungeon[cors.x+1][cors.y] = 1
 					cors.x += 1
 					rooms += 1
-					#print("good Right")
-	#for i in range(grid_size):
-	#	print(dungeon[i])
-	#....return dungeon
 	cors = Vector2i(grid_size/2, grid_size/2)
 
 #function to check if room can be placed in grid
@@ -124,10 +113,11 @@ func generate_rooms():
 
 #function to place start room
 func place_start():
-	#dungeon[grid_size/2][grid_size/2] = standard_rooms[1]["path"]
 	var scene = load(dungeon[grid_size/2][grid_size/2])
 	instance = scene.instantiate()
 	add_child(instance)
+	player.position = Vector2i(0, 0)
+	print(dungeon[grid_size/2][grid_size/2])
 	
 #function to load and swap room scene
 func load_scene():
@@ -138,34 +128,28 @@ func load_scene():
 		scene_name = str(dungeon[cors.x][cors.y])
 	var scene = load(scene_name)
 	instance = scene.instantiate()
-	#await get_tree().create_timer(1).timeout
 	add_child(instance)
-	print("x")
 	
 func _on_up_body_entered(body): #if player wants to move up
-	print("Up")
+	#print("Up")
 	if (cors.x-1 >= 0) and (str(dungeon[cors.x-1][cors.y]) != "0"):
 		cors.x -= 1
 		load_scene()
-		player.position = Vector2i(0, 123)
+		player.position = Vector2i(0, 120)
 
 func _on_down_body_entered(body): #if player wants to move down
-	print("down")
 	if (cors.x+1 <= grid_size) and (str(dungeon[cors.x+1][cors.y]) != "0"):
 		cors.x += 1
 		load_scene()
-		player.position = Vector2i(0, -123)
+		player.position = Vector2i(0, -120)
 		
-
 func _on_left_body_entered(body): #if player wants to move left
-	print("left")
 	if (cors.y-1 >= 0) and (str(dungeon[cors.x][cors.y-1]) != "0"):
 		cors.y -= 1
 		load_scene()
 		player.position = Vector2i(260, 0)
 
 func _on_right_body_entered(body): #if player wants to move right
-	print("right")
 	if (cors.y+1 <= grid_size) and (str(dungeon[cors.x][cors.y+1]) != "0"):	
 		cors.y += 1
 		load_scene()
@@ -190,7 +174,7 @@ func display_doors():
 		else:
 			TLeft.show()
 		
-		if cors.y+1 <= grid_size and str(dungeon[cors.x][cors.y+1]) != "0":
+		if cors.y+1 < grid_size and str(dungeon[cors.x][cors.y+1]) != "0":
 			TRight.hide()
 		else:
 			TRight.show()	
