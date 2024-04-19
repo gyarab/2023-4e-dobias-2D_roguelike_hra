@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var animated_sprite = $AnimatedSprite2D
+@onready var sprite = $Sprite2D
 
 @onready var attack_up = $Area2D/Up
 @onready var attack_down = $Area2D2/Down
@@ -15,7 +15,6 @@ var down = false
 func _process(delta):
 	attack_direction()
 	attack_zones()
-	attack_animation()
 #function to determine where to attack
 func attack_direction():
 	if Input.get_action_strength("Attack_right"):
@@ -23,26 +22,31 @@ func attack_direction():
 		right = true
 		down = false
 		up = false
+		sprite.set_visible(true)
 	elif Input.get_action_strength("Attack_up"):
 		left = false
 		right = false
 		down = false
 		up = true
+		sprite.set_visible(true)
 	elif Input.get_action_strength("Attack_left"):
 		left = true
 		right = false
 		down = false
 		up = false
+		sprite.set_visible(true)
 	elif Input.get_action_strength("Attack_down"):
 		left = false
 		right = false
 		down = true
 		up = false
+		sprite.set_visible(true)
 	else:
 		left = false
 		right = false
 		down = false
 		up = false
+		sprite.set_visible(false)
 		
 #function to enable/disable attack zones acordingly to atack directions
 func attack_zones():
@@ -51,18 +55,7 @@ func attack_zones():
 	attack_left.set_disabled(!left)
 	attack_right.set_disabled(!right)
 	
-#function to play attack animation in the corect direction
-func attack_animation():
-	if right:
-		animated_sprite.play("attack_h")
-	elif left:
-		animated_sprite.play("attack_h")
-	elif up:
-		animated_sprite.play("attack_v")
-	elif down:
-		animated_sprite.play("attack_v")
-	else:
-		animated_sprite.play("hold")
+
 	
 	
 	

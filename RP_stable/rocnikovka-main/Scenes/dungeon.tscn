@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Dungeon_generation.gd" id="1_q3f0n"]
 [ext_resource type="PackedScene" uid="uid://8dk3qaprlcm0" path="res://Scenes/player.tscn" id="3_84c5p"]
-[ext_resource type="Texture2D" uid="uid://dofdg2kcpvm00" path="res://Art/tiles/tiles.png" id="3_nvd3u"]
+[ext_resource type="Texture2D" uid="uid://cf7c213o4ybrl" path="res://Art/tiles/tiles.png" id="3_nvd3u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_orfhn"]
 

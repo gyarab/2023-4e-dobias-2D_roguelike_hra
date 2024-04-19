@@ -233,7 +233,7 @@ animations = [{
 size = Vector2(8, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ixd5i"]
-size = Vector2(8, 29)
+size = Vector2(10, 30)
 
 [node name="Player" type="CharacterBody2D"]
 top_level = true
@@ -245,7 +245,7 @@ script = ExtResource("1_0jjt7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_d2c2t")
-animation = &"walk_right"
+animation = &"idle"
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2(0, 10)
@@ -254,12 +254,10 @@ shape = SubResource("RectangleShape2D_nqqvd")
 [node name="Camera2D2" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
-[node name="weapon" parent="." instance=ExtResource("2_ghos4")]
-
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 1.5)
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_ixd5i")
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
@@ -271,5 +269,7 @@ offset_right = -237.0
 offset_bottom = -149.0
 value = 100.0
 texture_progress = ExtResource("3_fbslf")
+
+[node name="weapon" parent="." instance=ExtResource("2_ghos4")]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,92 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://ddd86s453gb8j"]
+[gd_scene load_steps=3 format=3 uid="uid://ddd86s453gb8j"]
 
 [ext_resource type="PackedScene" uid="uid://dyu174oi2prce" path="res://Scenes/weapon.tscn" id="1_y2gbb"]
 [ext_resource type="Texture2D" uid="uid://c8ja1osdd2imn" path="res://Art/weapons/shovel.png" id="2_x1umw"]
-[ext_resource type="Texture2D" uid="uid://drarv6wgbgqe2" path="res://Art/weapons/crutch.png" id="3_u558c"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yjvq2"]
-atlas = ExtResource("2_x1umw")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7gp7g"]
-atlas = ExtResource("2_x1umw")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7fe1i"]
-atlas = ExtResource("2_x1umw")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ildb1"]
-atlas = ExtResource("2_x1umw")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jdb6i"]
-atlas = ExtResource("3_u558c")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_py7kj"]
-atlas = ExtResource("3_u558c")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_avqaf"]
-atlas = ExtResource("3_u558c")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kdld0"]
-atlas = ExtResource("3_u558c")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_04mqt"]
-atlas = ExtResource("2_x1umw")
-region = Rect2(64, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_nke4r"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yjvq2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7gp7g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7fe1i")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ildb1")
-}],
-"loop": true,
-"name": &"attack_h",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jdb6i")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_py7kj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_avqaf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kdld0")
-}],
-"loop": true,
-"name": &"attack_v",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_04mqt")
-}],
-"loop": true,
-"name": &"hold",
-"speed": 5.0
-}]
 
 [node name="weapon" instance=ExtResource("1_y2gbb")]
 
-[node name="AnimatedSprite2D" parent="." index="0"]
-sprite_frames = SubResource("SpriteFrames_nke4r")
-animation = &"attack_v"
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_x1umw")
