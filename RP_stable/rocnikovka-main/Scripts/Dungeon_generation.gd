@@ -1,6 +1,6 @@
 extends Node2D
 
-var boss_room = "boss"
+var boss_room = "res://Scenes/Rooms/Boss_rooms/boss_room.tscn"
 var standard_rooms = {}
 var start_room = "res://Scenes/Rooms/Start_rooms/start_room.tscn"
 
@@ -10,6 +10,7 @@ var instance = ""
 var scene_name = ""
 var grid_size = 0
 var num_enemies = 0
+var num_rooms = 10
 
 @onready var TUp = get_node("TUp")
 @onready var TDown = get_node("TDown")
@@ -20,7 +21,8 @@ var num_enemies = 0
 
 func _ready():
 	load_rooms()
-	generate_dungeon(40)
+	generate_dungeon()
+	check_for_boss()
 	generate_rooms()
 	place_start()
 	
@@ -47,7 +49,7 @@ func load_rooms():
 	
 #function to generate grid representation of room layout
 #with higher numbers of rooms (>40) returns "Stack overflow (stack size: 1024). Check for infinite recursion in your script." a lot
-func generate_dungeon(num_rooms):
+func generate_dungeon():
 	grid_size = ceil(num_rooms*0.5)
 	
 	#generate empty dungeon grid
@@ -67,7 +69,8 @@ func generate_dungeon(num_rooms):
 	while rooms < num_rooms:
 		if !can_be_placed(dungeon, cors.x, cors.y-1, grid_size) and !can_be_placed(dungeon, cors.x, cors.y+1, grid_size) and !can_be_placed(dungeon, cors.x-1, cors.y, grid_size) and !can_be_placed(dungeon, cors.x+1, cors.y, grid_size):
 			dungeon = []
-			generate_dungeon(num_rooms)
+			generate_dungeon()
+			return
 		var direction = randi_range(0, 3) #0=UP, 1=DOWN, 2=LEFT, 3=RIGHT
 		match direction:
 			0:
@@ -90,8 +93,39 @@ func generate_dungeon(num_rooms):
 					dungeon[cors.x+1][cors.y] = 1
 					cors.x += 1
 					rooms += 1
+					
+	if !can_be_placed(dungeon, cors.x, cors.y-1, grid_size) and !can_be_placed(dungeon, cors.x, cors.y+1, grid_size) and !can_be_placed(dungeon, cors.x-1, cors.y, grid_size) and !can_be_placed(dungeon, cors.x+1, cors.y, grid_size):
+		dungeon = []
+		generate_dungeon()
+		return
+	else:
+		var direction = randi_range(0, 3) #0=UP, 1=DOWN, 2=LEFT, 3=RIGHT
+		match direction:
+			0:
+				if can_be_placed(dungeon, cors.x, cors.y-1, grid_size):
+					dungeon[cors.x][cors.y-1] = 2
+			1:
+				if can_be_placed(dungeon, cors.x, cors.y+1, grid_size):
+					dungeon[cors.x][cors.y+1] = 2
+			2:
+				if can_be_placed(dungeon, cors.x-1, cors.y, grid_size):
+					dungeon[cors.x-1][cors.y] = 2
+			3:
+				if can_be_placed(dungeon, cors.x+1, cors.y, grid_size):
+					dungeon[cors.x+1][cors.y] = 2
 	cors = Vector2i(grid_size/2, grid_size/2)
 
+#function to check if boss room was created
+func check_for_boss():
+	var found = false
+	for x in range(grid_size):
+		for y in range(grid_size):
+			if int(dungeon[x][y]) == 2:
+				found = true
+	if found == false:
+		generate_dungeon()
+	for i in range(grid_size):
+		print(dungeon[i])
 #function to check if room can be placed in grid
 func can_be_placed(dungeon, x, y, size):
 	if	x<0 or x>size-1 or y<0 or y>size-1: #is the choosen place in the grid?
@@ -108,8 +142,8 @@ func generate_rooms():
 		for x in range(dungeon.size()):
 			if int(dungeon[x][y]) == 1:
 				dungeon[x][y] = standard_rooms[randi_range(1,standard_rooms.size())]["path"] + " 0" #asign a random room scene and set is as not cleared
-	for i in range(dungeon.size()):
-		print(dungeon[i])
+			elif int(dungeon[x][y]) == 2:
+				dungeon[x][y] = boss_room + " 0"
 
 #function to place start room
 func place_start():
@@ -117,7 +151,6 @@ func place_start():
 	instance = scene.instantiate()
 	add_child(instance)
 	player.position = Vector2i(0, 0)
-	print(dungeon[grid_size/2][grid_size/2])
 	
 #function to load and swap room scene
 func load_scene():
@@ -138,7 +171,7 @@ func _on_up_body_entered(body): #if player wants to move up
 		player.position = Vector2i(0, 120)
 
 func _on_down_body_entered(body): #if player wants to move down
-	if (cors.x+1 <= grid_size) and (str(dungeon[cors.x+1][cors.y]) != "0"):
+	if (cors.x+1 < grid_size) and (str(dungeon[cors.x+1][cors.y]) != "0"):
 		cors.x += 1
 		load_scene()
 		player.position = Vector2i(0, -120)
@@ -150,7 +183,7 @@ func _on_left_body_entered(body): #if player wants to move left
 		player.position = Vector2i(260, 0)
 
 func _on_right_body_entered(body): #if player wants to move right
-	if (cors.y+1 <= grid_size) and (str(dungeon[cors.x][cors.y+1]) != "0"):	
+	if (cors.y+1 < grid_size) and (str(dungeon[cors.x][cors.y+1]) != "0"):	
 		cors.y += 1
 		load_scene()
 		player.position = Vector2i(-260, 0)
@@ -178,3 +211,8 @@ func display_doors():
 			TRight.hide()
 		else:
 			TRight.show()	
+
+#function to get number of enemies in current room
+
+#func get_enemy_count():
+	#num_enemies = 
