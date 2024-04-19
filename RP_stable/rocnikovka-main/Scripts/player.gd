@@ -36,5 +36,4 @@ func _on_area_2d_body_entered(body):
 	health -= 1
 	health_bar.value = health * 33
 	if health == 0:
-		get_tree()#.quit()
-	
+			get_tree().change_scene_to_file("res://Scenes/Start_menu.tscn")

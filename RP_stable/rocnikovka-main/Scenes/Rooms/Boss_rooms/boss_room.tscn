@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://rlcqrxtyfgxj"]
+[gd_scene load_steps=15 format=3 uid="uid://rlcqrxtyfgxj"]
 
 [ext_resource type="PackedScene" uid="uid://h35bxd3ffy3y" path="res://Scenes/base_room.tscn" id="1_diga3"]
 [ext_resource type="Texture2D" uid="uid://druh4pqk0k0xq" path="res://Art/enemies/boss.png" id="2_ndwtw"]
-[ext_resource type="Script" path="res://Scenes/Rooms/Boss_rooms/boss.gd" id="3_tl4xm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3u0dr"]
 atlas = ExtResource("2_ndwtw")
@@ -87,10 +86,14 @@ size = Vector2(62, 62)
 
 [node name="Room" instance=ExtResource("1_diga3")]
 
+[node name="Base" parent="." index="0"]
+layer_2/tile_data = PackedInt32Array(-262153, 0, 2)
+
 [node name="boss" type="AnimatedSprite2D" parent="." index="1"]
 top_level = true
 sprite_frames = SubResource("SpriteFrames_jhkl4")
-script = ExtResource("3_tl4xm")
+frame = 8
+frame_progress = 0.270704
 
 [node name="Area2D" type="Area2D" parent="boss" index="0"]
 

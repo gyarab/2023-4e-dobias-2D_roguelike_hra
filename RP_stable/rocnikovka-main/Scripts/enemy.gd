@@ -17,7 +17,6 @@ func _process(delta):
 		animated_sprite.flip_h = true
 	else:
 		animated_sprite.flip_h = false
-	print(1)
 
 func _on_area_2d_body_entered(body):
 	player = body

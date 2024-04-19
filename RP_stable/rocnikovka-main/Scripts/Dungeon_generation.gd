@@ -10,7 +10,7 @@ var instance = ""
 var scene_name = ""
 var grid_size = 0
 var num_enemies = 0
-var num_rooms = 10
+@export var num_rooms = 10
 
 @onready var TUp = get_node("TUp")
 @onready var TDown = get_node("TDown")
@@ -137,7 +137,7 @@ func can_be_placed(dungeon, x, y, size):
 #function to generate room information
 func generate_rooms():
 	var rooms = {}
-	dungeon[dungeon.size()/2][dungeon.size()/2] = start_room #place start room in the middle
+	dungeon[dungeon.size()/2][dungeon.size()/2] = str(start_room) #place start room in the middle
 	for y in range(dungeon.size()):
 		for x in range(dungeon.size()):
 			if int(dungeon[x][y]) == 1:
@@ -214,5 +214,3 @@ func display_doors():
 
 #function to get number of enemies in current room
 
-#func get_enemy_count():
-	#num_enemies = 
