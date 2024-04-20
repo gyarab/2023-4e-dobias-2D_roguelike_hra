@@ -10,7 +10,9 @@ var instance = ""
 var scene_name = ""
 var grid_size = 0
 var num_enemies = 0
+
 @export var num_rooms = 10
+@export var closed_if_enemy = true #to test doors showing when enemy killing does not work
 
 @onready var TUp = get_node("TUp")
 @onready var TDown = get_node("TDown")
@@ -26,9 +28,8 @@ func _ready():
 	generate_rooms()
 	place_start()
 	
-func _physics_process(delta):
+func _physics_process(delta): #checks if doors should be open every frame
 	display_doors()
-	
 	
 #easier wait function
 func wait(sec):
@@ -56,7 +57,7 @@ func generate_dungeon():
 	for y in range(grid_size):
 		dungeon.append([])
 		for x in range(grid_size):
-			dungeon[y].append(0)
+			dungeon[y].append("0")
 	
 	#add start room in the middle
 	dungeon[grid_size/2][grid_size/2] = 1
@@ -124,13 +125,12 @@ func check_for_boss():
 				found = true
 	if found == false:
 		generate_dungeon()
-	for i in range(grid_size):
-		print(dungeon[i])
+		
 #function to check if room can be placed in grid
 func can_be_placed(dungeon, x, y, size):
-	if	x<0 or x>size-1 or y<0 or y>size-1: #is the choosen place in the grid?
+	if	x<0 or x>size-1 or y<0 or y>size-1: #is the choosen place in the grid?ssssssss
 		return false
-	if dungeon[x][y] != 0: #is the choosen place empty?
+	if str(dungeon[x][y]) != "0": #is the choosen place empty?
 		return false
 	return true
 	
@@ -164,34 +164,56 @@ func load_scene():
 	add_child(instance)
 	
 func _on_up_body_entered(body): #if player wants to move up
-	#print("Up")
-	if (cors.x-1 >= 0) and (str(dungeon[cors.x-1][cors.y]) != "0"):
-		cors.x -= 1
-		load_scene()
-		player.position = Vector2i(0, 120)
+	if closed_if_enemy:
+		if (cors.x-1 >= 0) and (str(dungeon[cors.x-1][cors.y]) != "0") and num_enemies == 0:
+			cors.x -= 1
+			load_scene()
+			player.position = Vector2i(0, 120)
+	else:
+		if (cors.x-1 >= 0) and (str(dungeon[cors.x-1][cors.y]) != "0"):
+			cors.x -= 1
+			load_scene()
+			player.position = Vector2i(0, 120)
 
 func _on_down_body_entered(body): #if player wants to move down
-	if (cors.x+1 < grid_size) and (str(dungeon[cors.x+1][cors.y]) != "0"):
-		cors.x += 1
-		load_scene()
-		player.position = Vector2i(0, -120)
-		
+	if closed_if_enemy:
+		if (cors.x+1 < grid_size) and (str(dungeon[cors.x+1][cors.y]) != "0") and num_enemies == 0:
+			cors.x += 1
+			load_scene()
+			player.position = Vector2i(0, -120)
+	else:
+		if (cors.x+1 < grid_size) and (str(dungeon[cors.x+1][cors.y]) != "0"):
+			cors.x += 1
+			load_scene()
+			player.position = Vector2i(0, -120)
 func _on_left_body_entered(body): #if player wants to move left
-	if (cors.y-1 >= 0) and (str(dungeon[cors.x][cors.y-1]) != "0"):
-		cors.y -= 1
-		load_scene()
-		player.position = Vector2i(260, 0)
+	if closed_if_enemy:
+		if (cors.y-1 >= 0) and (str(dungeon[cors.x][cors.y-1]) != "0") and num_enemies == 0:
+			cors.y -= 1
+			load_scene()
+			player.position = Vector2i(260, 0)
+	else:
+		if (cors.y-1 >= 0) and (str(dungeon[cors.x][cors.y-1]) != "0"):
+			cors.y -= 1
+			load_scene()
+			player.position = Vector2i(260, 0)
 
 func _on_right_body_entered(body): #if player wants to move right
-	if (cors.y+1 < grid_size) and (str(dungeon[cors.x][cors.y+1]) != "0"):	
-		cors.y += 1
-		load_scene()
-		player.position = Vector2i(-260, 0)
+	if closed_if_enemy:
+		if (cors.y+1 < grid_size) and (str(dungeon[cors.x][cors.y+1]) != "0") and num_enemies == 0:	
+			cors.y += 1
+			load_scene()
+			player.position = Vector2i(-260, 0)
+	else:
+		if (cors.y+1 < grid_size) and (str(dungeon[cors.x][cors.y+1]) != "0"):
+			cors.y += 1
+			load_scene()
+			player.position = Vector2i(-260, 0)
 		
 #function to display entrances/exits acordingly to room structure and enemies
 #shows entrance/exit if room exists in the direction and the number of enemies is 0
 func display_doors():
-	if num_enemies == 0:
+	if num_enemies == 0 or !closed_if_enemy:
 		if cors.x-1 >= 0 and str(dungeon[cors.x-1][cors.y]) != "0":
 			TUp.hide()
 		else:
@@ -210,7 +232,13 @@ func display_doors():
 		if cors.y+1 < grid_size and str(dungeon[cors.x][cors.y+1]) != "0":
 			TRight.hide()
 		else:
-			TRight.show()	
-
+			TRight.show()
+	else:
+		TRight.show()
+		TLeft.show()
+		TUp.show()
+		TDown.show()
+		
 #function to get number of enemies in current room
-
+func _on_enemy_detector_body_entered(body):
+	num_enemies += 1

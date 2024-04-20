@@ -65,6 +65,7 @@ animations = [{
 
 [node name="Enemy" type="CharacterBody2D"]
 top_level = true
+light_mask = 17
 y_sort_enabled = true
 script = ExtResource("1_m7yb4")
 

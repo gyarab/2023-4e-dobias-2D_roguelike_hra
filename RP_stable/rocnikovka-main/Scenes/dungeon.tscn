@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d2jvkocpe2a6b"]
+[gd_scene load_steps=14 format=3 uid="uid://d2jvkocpe2a6b"]
 
 [ext_resource type="Script" path="res://Scripts/Dungeon_generation.gd" id="1_q3f0n"]
 [ext_resource type="PackedScene" uid="uid://8dk3qaprlcm0" path="res://Scenes/player.tscn" id="3_84c5p"]
@@ -61,6 +61,9 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 2
 physics_layer_0/collision_mask = 6
 sources/0 = SubResource("TileSetAtlasSource_nqfro")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c7ymt"]
+size = Vector2(583, 327)
 
 [node name="Dungeon" type="Node2D"]
 script = ExtResource("1_q3f0n")
@@ -132,7 +135,14 @@ tile_set = SubResource("TileSet_slbd6")
 format = 2
 layer_0/tile_data = PackedInt32Array(-65527, 196608, 1, 9, 196608, 1)
 
+[node name="enemy_detector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_detector"]
+position = Vector2(1.5, -4.5)
+shape = SubResource("RectangleShape2D_c7ymt")
+
 [connection signal="body_entered" from="UpA" to="." method="_on_up_body_entered"]
 [connection signal="body_entered" from="DownA" to="." method="_on_down_body_entered"]
 [connection signal="body_entered" from="LeftA" to="." method="_on_left_body_entered"]
 [connection signal="body_entered" from="RightA" to="." method="_on_right_body_entered"]
+[connection signal="body_entered" from="enemy_detector" to="." method="_on_enemy_detector_body_entered"]
