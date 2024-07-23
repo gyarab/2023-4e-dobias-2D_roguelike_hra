@@ -12,6 +12,12 @@ var left = false
 var up = false
 var down = false
 
+func _process(delta):
+	attack_d.set_disabled(true)
+	if Input.get_action_strength("Attack_down"):
+		attack_d.set_disabled(false)
+		
+"""
 var rotation_point = Vector2i(0,0)
 
 func _process(delta):
@@ -105,3 +111,4 @@ func rotate_weapon():
 func attack_rotate():
 	if attack_down() or attack_left() or attack_right() or attack_up():
 		sprite.set_rotation_degrees(10)
+"""

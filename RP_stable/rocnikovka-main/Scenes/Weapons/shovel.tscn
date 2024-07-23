@@ -7,3 +7,7 @@
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_x1umw")
+
+[node name="Up" parent="Area2D" index="0"]
+light_mask = 49
+visibility_layer = 49

@@ -27,4 +27,4 @@ func _on_area_2d_body_exited(body):
 	chase = false
 
 func _on_hb_body_entered(body):
-	print(body)
+	print("a")
