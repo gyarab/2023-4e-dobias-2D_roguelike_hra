@@ -71,27 +71,33 @@ y_sort_enabled = true
 script = ExtResource("1_m7yb4")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-2, -1.5)
 shape = SubResource("RectangleShape2D_6gk2e")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-visible = false
 scale = Vector2(0.1, 0.1)
 texture = SubResource("CompressedTexture2D_pm4ju")
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 position = Vector2(-1, 1)
 shape = SubResource("CircleShape2D_hd5ba")
 
 [node name="HB" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 48
+light_mask = 129
+visibility_layer = 129
+collision_layer = 128
+collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HB"]
+light_mask = 128
+visibility_layer = 128
 position = Vector2(-5.5, -1)
 shape = SubResource("RectangleShape2D_ioi3o")
 
@@ -100,4 +106,4 @@ sprite_frames = SubResource("SpriteFrames_cbesx")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
-[connection signal="body_entered" from="HB" to="." method="_on_hb_body_entered"]
+[connection signal="area_shape_entered" from="HB" to="." method="_on_hb_area_shape_entered"]

@@ -4,10 +4,18 @@
 [ext_resource type="Texture2D" uid="uid://c8ja1osdd2imn" path="res://Art/weapons/shovel.png" id="2_x1umw"]
 
 [node name="weapon" instance=ExtResource("1_y2gbb")]
+light_mask = 145
+visibility_layer = 145
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_x1umw")
 
+[node name="Area2D" parent="." index="1"]
+light_mask = 128
+visibility_layer = 128
+collision_layer = 145
+collision_mask = 145
+
 [node name="Up" parent="Area2D" index="0"]
-light_mask = 49
-visibility_layer = 49
+light_mask = 128
+visibility_layer = 128

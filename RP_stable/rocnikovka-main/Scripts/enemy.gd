@@ -26,5 +26,5 @@ func _on_area_2d_body_exited(body):
 	player = null
 	chase = false
 
-func _on_hb_body_entered(body):
-	print("a")
+func _on_hb_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	print("A")
