@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var animated_sprite = $AnimatedSprite2D
 
+
 var SPEED = 3
 var chase = false
 var player = null
@@ -17,6 +18,9 @@ func _process(delta):
 		animated_sprite.flip_h = true
 	else:
 		animated_sprite.flip_h = false
+	
+	if(health == 0):
+		queue_free()
 
 func _on_area_2d_body_entered(body):
 	player = body
@@ -27,4 +31,4 @@ func _on_area_2d_body_exited(body):
 	chase = false
 
 func _on_hb_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	print("A")
+	health -= 1

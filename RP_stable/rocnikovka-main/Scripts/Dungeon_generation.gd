@@ -30,6 +30,7 @@ func _ready():
 	
 func _physics_process(delta): #checks if doors should be open every frame
 	display_doors()
+	print(num_enemies)
 	
 #easier wait function
 func wait(sec):
@@ -242,3 +243,7 @@ func display_doors():
 #function to get number of enemies in current room
 func _on_enemy_detector_body_entered(body):
 	num_enemies += 1
+
+#function to keep track of how mny enemies are still alive
+func _on_enemy_detector_body_exited(body):
+	num_enemies -= 1

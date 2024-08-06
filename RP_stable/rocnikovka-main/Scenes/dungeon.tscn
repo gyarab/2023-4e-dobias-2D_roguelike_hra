@@ -146,3 +146,4 @@ shape = SubResource("RectangleShape2D_c7ymt")
 [connection signal="body_entered" from="LeftA" to="." method="_on_left_body_entered"]
 [connection signal="body_entered" from="RightA" to="." method="_on_right_body_entered"]
 [connection signal="body_entered" from="enemy_detector" to="." method="_on_enemy_detector_body_entered"]
+[connection signal="body_exited" from="enemy_detector" to="." method="_on_enemy_detector_body_exited"]
