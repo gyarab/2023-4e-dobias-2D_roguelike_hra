@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://doqg6ys8og454"]
 
 [ext_resource type="PackedScene" uid="uid://h35bxd3ffy3y" path="res://Scenes/base_room.tscn" id="1_gpdsd"]
-[ext_resource type="PackedScene" uid="uid://hhf5tkjirnq2" path="res://Scenes/enemy.tscn" id="2_c0ukr"]
+[ext_resource type="PackedScene" uid="uid://hhf5tkjirnq2" path="res://Scenes/Enemies/enemy_1.tscn" id="2_c0ukr"]
 
 [node name="Room" instance=ExtResource("1_gpdsd")]
 

@@ -3,6 +3,7 @@ extends Node2D
 var boss_room = "res://Scenes/Rooms/Boss_rooms/boss_room.tscn"
 var standard_rooms = {}
 var start_room = "res://Scenes/Rooms/Start_rooms/start_room.tscn"
+var enemies = {}
 
 var dungeon = []
 var cors = Vector2i(0,0)
@@ -30,7 +31,7 @@ func _ready():
 	
 func _physics_process(delta): #checks if doors should be open every frame
 	display_doors()
-	print(num_enemies)
+	
 	
 #easier wait function
 func wait(sec):
@@ -46,6 +47,19 @@ func load_rooms():
 		while file_name != "":
 			if !dir.current_is_dir():
 				standard_rooms[file_num] = {"path": "res://Scenes/Rooms/Standard_rooms/" + file_name}
+				file_num += 1
+			file_name = dir.get_next()
+			
+#function to load different enemies into array for easier access during spawning
+func load_enemies():
+	var file_num = 1
+	var dir = DirAccess.open("res://Scenes/Enemies/")
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if !dir.current_is_dir():
+				enemies[file_num] = {"path": "res://Scenes/Enemies/" + file_name}
 				file_num += 1
 			file_name = dir.get_next()
 	
@@ -154,8 +168,12 @@ func place_start():
 	player.position = Vector2i(0, 0)
 	
 #function to load and swap room scene
-func load_scene():
+func load_scene(): #TODO finish enemy spawning on spawnpoints only on first entry
 	remove_child(instance)
+	var cleared = false
+	if str(dungeon[cors.x][cors.y]).ends_with("C"):
+		dungeon[cors.x][cors.y] = str(dungeon[cors.x][cors.y]).erase((str(dungeon[cors.x][cors.y])).length()-1, 1)
+		cleared = true
 	if str(dungeon[cors.x][cors.y]).ends_with("0") or str(dungeon[cors.x][cors.y]).ends_with("1"):
 		scene_name = (str(dungeon[cors.x][cors.y])).erase((str(dungeon[cors.x][cors.y])).length()-2, 2)
 	else:
@@ -163,15 +181,20 @@ func load_scene():
 	var scene = load(scene_name)
 	instance = scene.instantiate()
 	add_child(instance)
+	cleared = false
 	
+#Functions to detect direction in which the player wants to move in. ->
+#Adds "C" as "cleared" on the end of dungeon cell name for handling of enemy spawning
 func _on_up_body_entered(body): #if player wants to move up
 	if closed_if_enemy:
 		if (cors.x-1 >= 0) and (str(dungeon[cors.x-1][cors.y]) != "0") and num_enemies == 0:
+			dungeon[cors.x][cors.y] = dungeon[cors.x][cors.y] + "C" 
 			cors.x -= 1
 			load_scene()
 			player.position = Vector2i(0, 120)
 	else:
 		if (cors.x-1 >= 0) and (str(dungeon[cors.x-1][cors.y]) != "0"):
+			dungeon[cors.x][cors.y] = dungeon[cors.x][cors.y] + "C" 
 			cors.x -= 1
 			load_scene()
 			player.position = Vector2i(0, 120)
@@ -179,22 +202,27 @@ func _on_up_body_entered(body): #if player wants to move up
 func _on_down_body_entered(body): #if player wants to move down
 	if closed_if_enemy:
 		if (cors.x+1 < grid_size) and (str(dungeon[cors.x+1][cors.y]) != "0") and num_enemies == 0:
+			dungeon[cors.x][cors.y] = dungeon[cors.x][cors.y] + "C" 
 			cors.x += 1
 			load_scene()
 			player.position = Vector2i(0, -120)
 	else:
 		if (cors.x+1 < grid_size) and (str(dungeon[cors.x+1][cors.y]) != "0"):
+			dungeon[cors.x][cors.y] = dungeon[cors.x][cors.y] + "C" 
 			cors.x += 1
 			load_scene()
 			player.position = Vector2i(0, -120)
+			
 func _on_left_body_entered(body): #if player wants to move left
 	if closed_if_enemy:
 		if (cors.y-1 >= 0) and (str(dungeon[cors.x][cors.y-1]) != "0") and num_enemies == 0:
+			dungeon[cors.x][cors.y] = dungeon[cors.x][cors.y] + "C" 
 			cors.y -= 1
 			load_scene()
 			player.position = Vector2i(260, 0)
 	else:
 		if (cors.y-1 >= 0) and (str(dungeon[cors.x][cors.y-1]) != "0"):
+			dungeon[cors.x][cors.y] = dungeon[cors.x][cors.y] + "C" 
 			cors.y -= 1
 			load_scene()
 			player.position = Vector2i(260, 0)
@@ -202,11 +230,13 @@ func _on_left_body_entered(body): #if player wants to move left
 func _on_right_body_entered(body): #if player wants to move right
 	if closed_if_enemy:
 		if (cors.y+1 < grid_size) and (str(dungeon[cors.x][cors.y+1]) != "0") and num_enemies == 0:	
+			dungeon[cors.x][cors.y] = dungeon[cors.x][cors.y] + "C" 
 			cors.y += 1
 			load_scene()
 			player.position = Vector2i(-260, 0)
 	else:
 		if (cors.y+1 < grid_size) and (str(dungeon[cors.x][cors.y+1]) != "0"):
+			dungeon[cors.x][cors.y] = dungeon[cors.x][cors.y] + "C" 
 			cors.y += 1
 			load_scene()
 			player.position = Vector2i(-260, 0)

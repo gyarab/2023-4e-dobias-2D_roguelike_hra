@@ -13,21 +13,21 @@ texture = ExtResource("2_x1umw")
 [node name="Area2D" parent="." index="1"]
 light_mask = 128
 visibility_layer = 128
-collision_layer = 145
-collision_mask = 145
+collision_layer = 128
+collision_mask = 128
 
 [node name="Up" parent="Area2D" index="0"]
 light_mask = 128
 visibility_layer = 128
 
 [node name="Area2D2" parent="." index="2"]
-collision_layer = 145
-collision_mask = 145
+collision_layer = 128
+collision_mask = 128
 
 [node name="Area2D3" parent="." index="3"]
-collision_layer = 145
-collision_mask = 145
+collision_layer = 128
+collision_mask = 128
 
 [node name="Area2D4" parent="." index="4"]
-collision_layer = 145
-collision_mask = 145
+collision_layer = 128
+collision_mask = 128

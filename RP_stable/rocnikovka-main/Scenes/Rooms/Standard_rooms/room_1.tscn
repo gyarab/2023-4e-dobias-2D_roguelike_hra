@@ -1,16 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://b5wpqg2lrldb3"]
 
 [ext_resource type="PackedScene" uid="uid://h35bxd3ffy3y" path="res://Scenes/base_room.tscn" id="1_mg6y8"]
-[ext_resource type="PackedScene" uid="uid://hhf5tkjirnq2" path="res://Scenes/enemy.tscn" id="2_jd7la"]
+[ext_resource type="PackedScene" uid="uid://hhf5tkjirnq2" path="res://Scenes/Enemies/enemy_1.tscn" id="2_jd7la"]
 
 [node name="Room1" instance=ExtResource("1_mg6y8")]
 
 [node name="Base" parent="." index="0"]
 layer_2/tile_data = PackedInt32Array(-196616, 0, 1, -196615, 0, 1, -196614, 0, 1, 65539, 0, 2, -65533, 0, 2, -196605, 0, 2)
 
-[node name="Enemy" parent="." index="1" instance=ExtResource("2_jd7la")]
-y_sort_enabled = false
-position = Vector2(-150, 0)
-
-[node name="Enemy2" parent="." index="2" instance=ExtResource("2_jd7la")]
+[node name="Enemy2" parent="." index="1" instance=ExtResource("2_jd7la")]
 position = Vector2(172, -1)
+
+[node name="Node2D" type="Node2D" parent="enemy_spawn_points" index="0"]
+position = Vector2(-168, 0)
