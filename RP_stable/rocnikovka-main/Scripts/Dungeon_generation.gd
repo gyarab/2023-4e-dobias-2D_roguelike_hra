@@ -5,6 +5,8 @@ var standard_rooms = {}
 var start_room = "res://Scenes/Rooms/Start_rooms/start_room.tscn"
 var enemies = {}
 
+@onready var Enemy = preload("res://Scenes/Enemies/enemy_1.tscn")
+
 var dungeon = []
 var cors = Vector2i(0,0)
 var instance = ""
@@ -167,19 +169,29 @@ func place_start():
 	add_child(instance)
 	player.position = Vector2i(0, 0)
 	
-#function to load and swap room scene
-func load_scene(): #TODO finish enemy spawning on spawnpoints only on first entry
+#function to load and swap room scene and spawn enemies on  a first visit of a room
+func load_scene():
 	remove_child(instance)
 	var cleared = false
+	
 	if str(dungeon[cors.x][cors.y]).ends_with("C"):
 		dungeon[cors.x][cors.y] = str(dungeon[cors.x][cors.y]).erase((str(dungeon[cors.x][cors.y])).length()-1, 1)
 		cleared = true
+		
 	if str(dungeon[cors.x][cors.y]).ends_with("0") or str(dungeon[cors.x][cors.y]).ends_with("1"):
 		scene_name = (str(dungeon[cors.x][cors.y])).erase((str(dungeon[cors.x][cors.y])).length()-2, 2)
 	else:
 		scene_name = str(dungeon[cors.x][cors.y])
+		
 	var scene = load(scene_name)
 	instance = scene.instantiate()
+	if !cleared:
+		var x = instance.get_node("enemy_spawn_points").get_child_count()
+		for i in range(x):
+			var Enemy_instance = Enemy.instantiate()
+			Enemy_instance.global_position = instance.get_node("enemy_spawn_points").get_child(i).position
+			instance.add_child(Enemy_instance)
+	
 	add_child(instance)
 	cleared = false
 	
