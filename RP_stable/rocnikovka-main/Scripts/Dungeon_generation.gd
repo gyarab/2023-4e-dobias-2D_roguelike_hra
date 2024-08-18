@@ -142,7 +142,9 @@ func check_for_boss():
 		for y in range(grid_size):
 			if int(dungeon[x][y]) == 2:
 				found += 1
+				print("a")
 	if found != 1:
+		dungeon = []
 		_ready()
 		
 #function to check if room can be placed in grid
