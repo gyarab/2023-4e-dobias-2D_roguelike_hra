@@ -25,11 +25,13 @@ var num_enemies = 0
 @onready var player = get_node("Player")
 
 func _ready():
+	dungeon = []
 	load_rooms()
 	generate_dungeon()
 	check_for_boss()
 	generate_rooms()
 	place_start()
+	print(dungeon)
 	
 func _physics_process(delta): #checks if doors should be open every frame
 	display_doors()
@@ -135,13 +137,13 @@ func generate_dungeon():
 
 #function to check if boss room was created
 func check_for_boss():
-	var found = false
+	var found = 0
 	for x in range(grid_size):
 		for y in range(grid_size):
 			if int(dungeon[x][y]) == 2:
-				found = true
-	if found == false:
-		generate_dungeon()
+				found += 1
+	if found != 1:
+		_ready()
 		
 #function to check if room can be placed in grid
 func can_be_placed(dungeon, x, y, size):
