@@ -7,6 +7,7 @@
 [node name="Room" instance=ExtResource("1_diga3")]
 
 [node name="Base" parent="." index="0"]
+scale = Vector2(1, 1.00112)
 layer_2/tile_data = PackedInt32Array(-262153, 0, 2)
 
 [node name="Boss" parent="." index="2" instance=ExtResource("2_810vr")]

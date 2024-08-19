@@ -239,7 +239,7 @@ size = Vector2(10, 30)
 top_level = true
 z_index = 1
 y_sort_enabled = true
-collision_layer = 14
+collision_layer = 4
 collision_mask = 14
 script = ExtResource("1_0jjt7")
 
