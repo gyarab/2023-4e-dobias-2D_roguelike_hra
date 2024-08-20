@@ -4,16 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://druh4pqk0k0xq" path="res://Art/enemies/boss.png" id="2_d0qs8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_djkwo"]
-size = Vector2(63, 1)
+size = Vector2(63, 2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2uj4k"]
-size = Vector2(63, 1)
+size = Vector2(63, 2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8e6gt"]
-size = Vector2(1, 63)
+size = Vector2(2, 63)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xoij"]
-size = Vector2(1, 63)
+size = Vector2(2, 63)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_32qh6"]
 size = Vector2(71, 71)
@@ -102,8 +102,8 @@ size = Vector2(63, 63)
 [node name="CharacterBody2D" type="CharacterBody2D"]
 top_level = true
 light_mask = 17
-collision_layer = 14
-collision_mask = 14
+collision_layer = 15
+collision_mask = 15
 script = ExtResource("1_dgnsm")
 
 [node name="Up" type="Area2D" parent="."]
@@ -114,7 +114,7 @@ collision_mask = 14
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Up"]
 light_mask = 128
 visibility_layer = 128
-position = Vector2(0, -33)
+position = Vector2(0, -33.5)
 shape = SubResource("RectangleShape2D_djkwo")
 
 [node name="Down" type="Area2D" parent="."]
@@ -123,7 +123,7 @@ collision_layer = 14
 collision_mask = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Down"]
-position = Vector2(0, 33)
+position = Vector2(0, 33.5)
 shape = SubResource("RectangleShape2D_2uj4k")
 
 [node name="Left" type="Area2D" parent="."]
@@ -132,7 +132,7 @@ collision_layer = 14
 collision_mask = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Left"]
-position = Vector2(-33, 0)
+position = Vector2(-33.5, 0)
 shape = SubResource("RectangleShape2D_8e6gt")
 
 [node name="Right" type="Area2D" parent="."]
@@ -141,7 +141,7 @@ collision_layer = 14
 collision_mask = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right"]
-position = Vector2(33, 0)
+position = Vector2(33.5, 0)
 shape = SubResource("RectangleShape2D_2xoij")
 
 [node name="HB" type="Area2D" parent="."]
@@ -164,7 +164,11 @@ position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_tj4lh")
 
 [connection signal="body_entered" from="Up" to="." method="_on_up_body_entered"]
+[connection signal="body_exited" from="Up" to="." method="_on_up_body_exited"]
 [connection signal="body_entered" from="Down" to="." method="_on_down_body_entered"]
+[connection signal="body_exited" from="Down" to="." method="_on_down_body_exited"]
 [connection signal="body_entered" from="Left" to="." method="_on_left_body_entered"]
+[connection signal="body_exited" from="Left" to="." method="_on_left_body_exited"]
 [connection signal="body_entered" from="Right" to="." method="_on_right_body_entered"]
+[connection signal="body_exited" from="Right" to="." method="_on_right_body_exited"]
 [connection signal="area_shape_entered" from="HB" to="." method="_on_hb_area_shape_entered"]
