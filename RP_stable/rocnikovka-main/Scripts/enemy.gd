@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 @onready var animated_sprite = $AnimatedSprite2D
 
-
 var SPEED = 3
 var chase = false
 var player = null

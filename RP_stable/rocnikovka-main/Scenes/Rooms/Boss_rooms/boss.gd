@@ -14,7 +14,6 @@ func _process(delta):
 	animated_sprite.play("default")
 
 func _physics_process(delta):
-	print(direction)
 	if hit_counter >= 7: # 7 == 5 ????
 		stunned_timer += delta
 		if stunned_timer >= stun_duration:
@@ -62,7 +61,6 @@ func _on_right_body_exited(body):
 	hit_detector = true
 
 func _on_hb_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	print("au")
 	health -= 1
 	if health == 0:
 		get_tree().change_scene_to_file("res://Scenes/Start_menu.tscn")

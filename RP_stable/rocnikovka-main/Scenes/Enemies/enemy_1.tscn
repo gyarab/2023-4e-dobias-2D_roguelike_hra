@@ -68,8 +68,8 @@ animations = [{
 top_level = true
 light_mask = 17
 y_sort_enabled = true
-collision_layer = 14
-collision_mask = 14
+collision_layer = 7
+collision_mask = 7
 script = ExtResource("1_m7yb4")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
@@ -81,6 +81,7 @@ scale = Vector2(0.1, 0.1)
 texture = SubResource("CompressedTexture2D_pm4ju")
 
 [node name="Area2D" type="Area2D" parent="."]
+light_mask = 0
 collision_layer = 8
 collision_mask = 8
 
@@ -91,7 +92,7 @@ shape = SubResource("CircleShape2D_hd5ba")
 [node name="HB" type="Area2D" parent="."]
 light_mask = 129
 visibility_layer = 129
-collision_layer = 128
+collision_layer = 0
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HB"]

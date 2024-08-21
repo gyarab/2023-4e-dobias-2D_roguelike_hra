@@ -31,7 +31,6 @@ func _ready():
 	check_for_boss()
 	generate_rooms()
 	place_start()
-	print(dungeon)
 	
 func _physics_process(delta): #checks if doors should be open every frame
 	display_doors()
@@ -142,7 +141,6 @@ func check_for_boss():
 		for y in range(grid_size):
 			if int(dungeon[x][y]) == 2:
 				found += 1
-				print("a")
 	if found != 1:
 		dungeon = []
 		_ready()
