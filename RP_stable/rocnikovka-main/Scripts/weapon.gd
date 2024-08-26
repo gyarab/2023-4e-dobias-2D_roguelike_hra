@@ -2,241 +2,74 @@ extends Node2D
 
 @onready var sprite = $Sprite2D
 
-@onready var attack_u = $Area2D/Up
-@onready var attack_d = $Area2D2/Down
-@onready var attack_l = $Area2D3/Left
-@onready var attack_r = $Area2D4/Right
+@onready var attackU = $Area2D/Up
+@onready var attackD = $Area2D2/Down 
+@onready var attackL = $Area2D3/Left
+@onready var attackR = $Area2D4/Right
 
-var right = false
-var left = false
-var up = false
-var down = false
-
-var rotation_point = Vector2i(0,0)
-
-var attack_cooldown = 0.5
-var attack_duration = 0.1
-var can_attack = true
 var attacked = false
-var attack_mem = true
+var attacking = false
+var attack_dur = 0.0
+var attack_cld = 0.0 #cld == cooldown
 
-func _process(delta):
+var up_a = false
+var down_a = false
+var left_a = false
+var right_a = false
+	
+func _physics_process(delta):
+	if Input.get_action_strength("Attack_up") == 1 and attacked == false and (down_a or left_a or right_a) != true:
+		attackU.set_disabled(false)
+		attacking = true
+		up_a = true
+		sprite.set_visible(true)
+		sprite.set_position(Vector2i(0, -15))
+	else:
+		attackU.set_disabled(true)
+				
+	if Input.get_action_strength("Attack_down") == 1 and attacked == false and (up_a or left_a or right_a) != true:
+		attackD.set_disabled(false)
+		attacking = true
+		down_a = true
+		sprite.set_visible(true)
+		sprite.set_position(Vector2i(0, 15))
+	else:
+		attackD.set_disabled(true)
+				
+	if Input.get_action_strength("Attack_left") == 1 and attacked == false and (up_a or down_a or right_a) != true:
+		attackL.set_disabled(false)
+		attacking = true
+		left_a = true
+		sprite.set_visible(true)
+		sprite.set_position(Vector2i(-11, 0))
+	else:
+		attackL.set_disabled(true)
+			
+	if Input.get_action_strength("Attack_right") == 1 and attacked == false and (up_a or down_a or left_a) != true:
+		attackR.set_disabled(false)
+		attacking = true
+		right_a = true
+		sprite.set_visible(true)
+		sprite.set_position(Vector2i(11, 0))
+	else:
+		attackR.set_disabled(true)
+		
+	if attacking == true:
+		attack_dur += delta
+	
+	if attack_dur >= 0.3:
+		attacked = true
+		attacking = false
+		attack_dur = 0.0
+		sprite.set_visible(false)
 	
 	if attacked == true:
-		attack_duration -= delta
-	
-	if attack_duration <= 0:
-		can_attack = false
-		attack_duration = 0.1
+		attack_cld += delta
+		
+	if attack_cld >= 0.5:
 		attacked = false
-	
-	if can_attack != attack_mem:
-		print(can_attack)
-		attack_mem = can_attack
-	
-	if can_attack == false:
-		attack_cooldown -= delta
-	
-	if attack_cooldown <= 0:
-		can_attack = true
-		attack_cooldown = 0
-		
-	attack_direction()
-	attack_zones()
-	rotate_weapon()
-	set_rotation_point()
-	sprite.position = Vector2i(0, 0)
-		
-#function to determine where to attack
-func attack_direction():
-	if can_attack:
-		if attack_right():
-			left = false
-			right = true
-			down = false
-			up = false
-			sprite.set_visible(true)
-		elif attack_up():
-			left = false
-			right = false
-			down = false
-			up = true
-			sprite.set_visible(true)
-		elif attack_left():
-			left = true
-			right = false
-			down = false
-			up = false
-			sprite.set_visible(true)
-		elif attack_down():
-			left = false
-			right = false
-			down = true
-			up = false
-			sprite.set_visible(true)
-	else:
-		left = false
-		right = false
-		down = false
-		up = false
-		sprite.set_visible(false)
-
-#easier attack input functions
-func attack_left():
-	return Input.get_action_strength("Attack_left")
-
-func attack_right():
-	return Input.get_action_strength("Attack_right")
-
-func attack_down():
-	return Input.get_action_strength("Attack_down")
-
-func attack_up():
-	return Input.get_action_strength("Attack_up")
-		
-#function to enable/disable attack zones acordingly to atack directions
-func attack_zones():
-	attack_u.set_disabled(!up)
-	attack_d.set_disabled(!down)
-	attack_l.set_disabled(!left)
-	attack_r.set_disabled(!right)
-	
-#function to determine rotation point
-func set_rotation_point():
-	sprite.set_offset(rotation_point)
-	if attack_up():
-		rotation_point = Vector2i(-12, 12)
-	elif attack_down():
-		rotation_point = Vector2i(-12, 12)
-	elif attack_left():
-		rotation_point = Vector2i(-9, 9)
-	elif attack_right():
-		rotation_point = Vector2i(-9, 9)
-	
-#function to rotate the weapon sprite
-func rotate_weapon():
-	if can_attack == true:
-		if attack_up():
-			attacked = true
-			sprite.set_rotation(0.75*PI)
-		elif attack_left():
-			attacked = true
-			sprite.set_rotation(0.25*PI)
-		elif attack_down():
-			attacked = true
-			sprite.set_rotation(1.75*PI)
-		elif attack_right():
-			attacked = true
-			sprite.set_rotation(1.25*PI)
-	else:
-		sprite.set_rotation(-sprite.get_rotation())
-		
-		
-		
-"""extends Node2D
-
-@onready var sprite = $Sprite2D
-
-@onready var attack_u = $Area2D/Up
-@onready var attack_d = $Area2D2/Down
-@onready var attack_l = $Area2D3/Left
-@onready var attack_r = $Area2D4/Right
-
-var right = false
-var left = false
-var up = false
-var down = false
-
-var rotation_point = Vector2i(0,0)
-
-func _process(delta):
-	attack_direction()
-	attack_zones()
-	rotate_weapon()
-	set_rotation_point()
-	#attack_rotate()
-	sprite.position = Vector2i(0, 0)
-	
-	
-#function to determine where to attack
-func attack_direction():
-	if attack_right():
-		left = false
-		right = true
-		down = false
-		up = false
-		sprite.set_visible(true)
-	elif attack_up():
-		left = false
-		right = false
-		down = false
-		up = true
-		sprite.set_visible(true)
-	elif attack_left():
-		left = true
-		right = false
-		down = false
-		up = false
-		sprite.set_visible(true)
-	elif attack_down():
-		left = false
-		right = false
-		down = true
-		up = false
-		sprite.set_visible(true)
-	else:
-		left = false
-		right = false
-		down = false
-		up = false
-		sprite.set_visible(false)
-
-#easier attack input functions
-func attack_left():
-	return Input.get_action_strength("Attack_left")
-
-func attack_right():
-	return Input.get_action_strength("Attack_right")
-
-func attack_down():
-	return Input.get_action_strength("Attack_down")
-
-func attack_up():
-	return Input.get_action_strength("Attack_up")
-		
-#function to enable/disable attack zones acordingly to atack directions
-func attack_zones():
-	attack_u.set_disabled(!up)
-	attack_d.set_disabled(!down)
-	attack_l.set_disabled(!left)
-	attack_r.set_disabled(!right)
-	
-#function to determine rotation point
-func set_rotation_point():
-	sprite.set_offset(rotation_point)
-	if attack_up():
-		rotation_point = Vector2i(-12, 12)
-	elif attack_down():
-		rotation_point = Vector2i(-12, 12)
-	elif attack_left():
-		rotation_point = Vector2i(-9, 9)
-	elif attack_right():
-		rotation_point = Vector2i(-9, 9)
-	
-#function to rotate the weapon sprite
-func rotate_weapon():
-	if attack_up():
-		sprite.set_rotation(0.75*PI)
-	elif attack_left():
-		sprite.set_rotation(0.25*PI)
-	elif attack_down():
-		sprite.set_rotation(1.75*PI)
-	elif attack_right():
-		sprite.set_rotation(1.25*PI)
-	else:
-		sprite.set_rotation(-sprite.get_rotation())
-	
-#function to rotate weapon during attack
-func attack_rotate():
-	if attack_down() or attack_left() or attack_right() or attack_up():
-		sprite.set_rotation_degrees(10)"""
+		attack_cld = 0.0
+		up_a = false
+		down_a = false
+		left_a = false
+		right_a = false
