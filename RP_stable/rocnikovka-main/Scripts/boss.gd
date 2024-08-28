@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var death_sound = $Death_sound
+@onready var hit_sound = $Hit_sound
 
 var speed = 200
 var health = 15
@@ -22,7 +24,7 @@ func _physics_process(delta):
 		return
 	else:
 		velocity = direction.normalized() * speed
-		move_and_slide()
+		move_and_slide()	
 		
 func _on_up_body_entered(body):
 	direction.y = randf_range(0.1, 0.9)
@@ -62,5 +64,9 @@ func _on_right_body_exited(body):
 
 func _on_hb_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	health -= 1
+	hit_sound.play()
 	if health == 0:
+		set_physics_process(false)
+		death_sound.play()
+		await get_tree().create_timer(0.5).timeout
 		get_tree().change_scene_to_file("res://Scenes/Start_menu.tscn")

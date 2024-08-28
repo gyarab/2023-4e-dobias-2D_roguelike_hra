@@ -1,10 +1,12 @@
 extends CharacterBody2D
 
 const SPEED = 300.0
-var health = 3
+var health = 5
 
 @onready var health_bar = $HealthBar
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var death_sound = $Death_sound
+@onready var hurt_sound = $Hurt_sound
 
 func _physics_process(delta):
 	var input_direction = Vector2(
@@ -30,5 +32,8 @@ func _process(delta):
 func _on_area_2d_body_entered(body):
 	health -= 1
 	health_bar.value = health * 33
+	hurt_sound.play()
 	if health == 0:
-			get_tree().change_scene_to_file("res://Scenes/Start_menu.tscn")
+		death_sound.play()
+		await get_tree().create_timer(0.5).timeout
+		get_tree().change_scene_to_file("res://Scenes/Start_menu.tscn")

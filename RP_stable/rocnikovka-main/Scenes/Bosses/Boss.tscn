@@ -1,7 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://cahrom8sn4dku"]
+[gd_scene load_steps=22 format=3 uid="uid://cahrom8sn4dku"]
 
-[ext_resource type="Script" path="res://Scenes/Rooms/Boss_rooms/boss.gd" id="1_dgnsm"]
+[ext_resource type="Script" path="res://Scripts/boss.gd" id="1_dgnsm"]
 [ext_resource type="Texture2D" uid="uid://druh4pqk0k0xq" path="res://Art/enemies/boss.png" id="2_d0qs8"]
+[ext_resource type="AudioStream" uid="uid://y55c6y1xg14s" path="res://Audio/Sfx/Boss_death.wav" id="3_gtiwp"]
+[ext_resource type="AudioStream" uid="uid://8oce3bcaae4c" path="res://Audio/Sfx/Enemy_hurt.wav" id="4_ugj6a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_djkwo"]
 size = Vector2(63, 2)
@@ -162,6 +164,12 @@ sprite_frames = SubResource("SpriteFrames_6k2ge")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_tj4lh")
+
+[node name="Death_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_gtiwp")
+
+[node name="Hit_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ugj6a")
 
 [connection signal="body_entered" from="Up" to="." method="_on_up_body_entered"]
 [connection signal="body_exited" from="Up" to="." method="_on_up_body_exited"]

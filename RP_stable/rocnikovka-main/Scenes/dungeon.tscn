@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://d2jvkocpe2a6b"]
+[gd_scene load_steps=15 format=3 uid="uid://d2jvkocpe2a6b"]
 
 [ext_resource type="Script" path="res://Scripts/Dungeon_generation.gd" id="1_q3f0n"]
 [ext_resource type="PackedScene" uid="uid://8dk3qaprlcm0" path="res://Scenes/player.tscn" id="3_84c5p"]
 [ext_resource type="Texture2D" uid="uid://cf7c213o4ybrl" path="res://Art/tiles/tiles.png" id="3_nvd3u"]
+[ext_resource type="AudioStream" uid="uid://ba5f8xhc7o60t" path="res://Audio/Music/Backround_music.mp3" id="4_atfua"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_orfhn"]
 
@@ -140,6 +141,10 @@ layer_0/tile_data = PackedInt32Array(-65527, 196608, 1, 9, 196608, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_detector"]
 position = Vector2(1.5, -4.5)
 shape = SubResource("RectangleShape2D_c7ymt")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_atfua")
+autoplay = true
 
 [connection signal="body_entered" from="UpA" to="." method="_on_up_body_entered"]
 [connection signal="body_entered" from="DownA" to="." method="_on_down_body_entered"]

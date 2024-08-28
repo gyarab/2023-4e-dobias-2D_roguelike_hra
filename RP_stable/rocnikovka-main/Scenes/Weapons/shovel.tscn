@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddd86s453gb8j"]
+[gd_scene load_steps=4 format=3 uid="uid://ddd86s453gb8j"]
 
 [ext_resource type="PackedScene" uid="uid://dyu174oi2prce" path="res://Scenes/weapon.tscn" id="1_y2gbb"]
 [ext_resource type="Texture2D" uid="uid://c8ja1osdd2imn" path="res://Art/weapons/shovel.png" id="2_x1umw"]
+[ext_resource type="AudioStream" uid="uid://drg2kiyhl5rvh" path="res://Audio/Sfx/Weapon_swing.wav" id="3_3tbht"]
 
 [node name="weapon" instance=ExtResource("1_y2gbb")]
 light_mask = 145
@@ -19,15 +20,28 @@ collision_mask = 128
 [node name="Up" parent="Area2D" index="0"]
 light_mask = 128
 visibility_layer = 128
+position = Vector2(0, -16)
 
 [node name="Area2D2" parent="." index="2"]
 collision_layer = 128
 collision_mask = 128
 
+[node name="Down" parent="Area2D2" index="0"]
+position = Vector2(0, 16)
+
 [node name="Area2D3" parent="." index="3"]
 collision_layer = 128
 collision_mask = 128
 
+[node name="Left" parent="Area2D3" index="0"]
+position = Vector2(-11, 0)
+
 [node name="Area2D4" parent="." index="4"]
 collision_layer = 128
 collision_mask = 128
+
+[node name="Right" parent="Area2D4" index="0"]
+position = Vector2(11, 0)
+
+[node name="Weapon_swing" type="AudioStreamPlayer2D" parent="." index="5"]
+stream = ExtResource("3_3tbht")

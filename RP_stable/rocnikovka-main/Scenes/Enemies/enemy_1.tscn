@@ -1,7 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://hhf5tkjirnq2"]
+[gd_scene load_steps=16 format=3 uid="uid://hhf5tkjirnq2"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_m7yb4"]
+[ext_resource type="AudioStream" uid="uid://dehqasm1kcubf" path="res://Audio/Sfx/Enemy_death.wav" id="3_k00j0"]
 [ext_resource type="Texture2D" uid="uid://chndj4y34quuv" path="res://Art/enemies/ghost.png" id="3_s2k7n"]
+[ext_resource type="AudioStream" uid="uid://8oce3bcaae4c" path="res://Audio/Sfx/Enemy_hurt.wav" id="4_t714e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6gk2e"]
 size = Vector2(14, 27)
@@ -103,6 +105,12 @@ shape = SubResource("RectangleShape2D_ioi3o")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_cbesx")
+
+[node name="Death_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_k00j0")
+
+[node name="Hit_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_t714e")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
