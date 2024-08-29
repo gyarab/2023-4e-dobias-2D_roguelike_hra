@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://gvnxpmp18ql4"]
+
+[ext_resource type="Texture2D" uid="uid://ck8mtvcgmtxi2" path="res://Art/Text/You_win.png" id="1_q8oug"]
+[ext_resource type="Texture2D" uid="uid://n6teaqo5jns3" path="res://Art/Text/play_again.png" id="2_rsjbe"]
+[ext_resource type="Script" path="res://Scripts/Buttons/Play.gd" id="3_qhk0g"]
+[ext_resource type="Texture2D" uid="uid://ck0ordy1iqvdy" path="res://Art/Text/quit.png" id="4_omhnm"]
+[ext_resource type="Script" path="res://Scripts/Buttons/Quit.gd" id="5_sr40w"]
+[ext_resource type="Texture2D" uid="uid://bp8dbc8kawflp" path="res://Art/Text/menu_background_color.png" id="6_yv1s0"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(8, 8)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -45.0
+offset_right = 65.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="You_win" type="Button" parent="Camera2D/VBoxContainer"]
+layout_mode = 2
+button_mask = 0
+icon = ExtResource("1_q8oug")
+flat = true
+icon_alignment = 1
+
+[node name="Play_again" type="Button" parent="Camera2D/VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("2_rsjbe")
+flat = true
+icon_alignment = 1
+script = ExtResource("3_qhk0g")
+
+[node name="Quit" type="Button" parent="Camera2D/VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("4_omhnm")
+flat = true
+icon_alignment = 1
+script = ExtResource("5_sr40w")
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D"]
+show_behind_parent = true
+scale = Vector2(30.7, 15.3)
+texture = ExtResource("6_yv1s0")

@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://y7yy5im7rvc3"]
 
-[ext_resource type="Texture2D" uid="uid://lnpis8hc1cv4" path="res://Art/Text/play.png" id="1_wrtch"]
-[ext_resource type="Script" path="res://Scripts/Play.gd" id="2_5vnn7"]
-[ext_resource type="Texture2D" uid="uid://ck0ordy1iqvdy" path="res://Art/Text/quit.png" id="3_c5aeb"]
-[ext_resource type="Script" path="res://Scripts/Quit.gd" id="4_gtgpp"]
-[ext_resource type="Texture2D" uid="uid://bp8dbc8kawflp" path="res://Art/Text/menu_background_color.png" id="5_bopqt"]
+[ext_resource type="Texture2D" uid="uid://lnpis8hc1cv4" path="res://Art/Text/play.png" id="1_tyd7a"]
+[ext_resource type="Script" path="res://Scripts/Buttons/Play.gd" id="2_fxiat"]
+[ext_resource type="Texture2D" uid="uid://ck0ordy1iqvdy" path="res://Art/Text/quit.png" id="3_tfvak"]
+[ext_resource type="Script" path="res://Scripts/Buttons/Quit.gd" id="4_om0ik"]
+[ext_resource type="Texture2D" uid="uid://bp8dbc8kawflp" path="res://Art/Text/menu_background_color.png" id="5_tar8o"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -26,19 +26,19 @@ alignment = 1
 
 [node name="Play" type="Button" parent="Camera2D/VBoxContainer"]
 layout_mode = 2
-icon = ExtResource("1_wrtch")
+icon = ExtResource("1_tyd7a")
 flat = true
 icon_alignment = 1
-script = ExtResource("2_5vnn7")
+script = ExtResource("2_fxiat")
 
 [node name="Quit" type="Button" parent="Camera2D/VBoxContainer"]
 layout_mode = 2
-icon = ExtResource("3_c5aeb")
+icon = ExtResource("3_tfvak")
 flat = true
 icon_alignment = 1
-script = ExtResource("4_gtgpp")
+script = ExtResource("4_om0ik")
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D"]
 show_behind_parent = true
 scale = Vector2(30.7, 15.3)
-texture = ExtResource("5_bopqt")
+texture = ExtResource("5_tar8o")

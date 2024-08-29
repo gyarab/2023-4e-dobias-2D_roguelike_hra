@@ -262,16 +262,6 @@ zoom = Vector2(2, 2)
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_ixd5i")
 
-[node name="HealthBar" type="TextureProgressBar" parent="."]
-z_index = 100
-y_sort_enabled = true
-offset_left = -285.0
-offset_top = -159.0
-offset_right = -237.0
-offset_bottom = -149.0
-value = 100.0
-texture_progress = ExtResource("3_fbslf")
-
 [node name="weapon" parent="." instance=ExtResource("2_ghos4")]
 
 [node name="Death_sound" type="AudioStreamPlayer2D" parent="."]
@@ -279,5 +269,36 @@ stream = ExtResource("5_cqsv5")
 
 [node name="Hurt_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_gg32s")
+
+[node name="HealthBar" type="HBoxContainer" parent="."]
+offset_left = -165.0
+offset_top = -105.0
+offset_right = -113.0
+offset_bottom = -64.0
+
+[node name="Heart1" type="Button" parent="HealthBar"]
+layout_mode = 2
+icon = ExtResource("3_fbslf")
+flat = true
+
+[node name="Heart2" type="Button" parent="HealthBar"]
+layout_mode = 2
+icon = ExtResource("3_fbslf")
+flat = true
+
+[node name="Heart3" type="Button" parent="HealthBar"]
+layout_mode = 2
+icon = ExtResource("3_fbslf")
+flat = true
+
+[node name="Heart4" type="Button" parent="HealthBar"]
+layout_mode = 2
+icon = ExtResource("3_fbslf")
+flat = true
+
+[node name="Heart5" type="Button" parent="HealthBar"]
+layout_mode = 2
+icon = ExtResource("3_fbslf")
+flat = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

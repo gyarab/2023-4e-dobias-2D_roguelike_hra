@@ -69,4 +69,4 @@ func _on_hb_area_shape_entered(area_rid, area, area_shape_index, local_shape_ind
 		set_physics_process(false)
 		death_sound.play()
 		await get_tree().create_timer(0.5).timeout
-		get_tree().change_scene_to_file("res://Scenes/Start_menu.tscn")
+		get_tree().change_scene_to_file("res://Scenes/Menu_screens/Win_menu.tscn")
