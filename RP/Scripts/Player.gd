@@ -42,10 +42,17 @@ func _on_area_2d_body_entered(body):
 	for i in range(health):
 		health_bar.get_child(i).set_visible(true)
 	
-	print(health)
-	
 	hurt_sound.play()
 	if health == 0:
 		death_sound.play()
 		await get_tree().create_timer(0.5).timeout
 		get_tree().change_scene_to_file("res://Scenes/Menu_screens/Death_menu.tscn")
+
+
+func _on_pickup_range_body_entered(body):
+	if health < 5:
+		health += 1
+		for i in range(health_start):
+			health_bar.get_child(i).set_visible(false)
+		for i in range(health):
+			health_bar.get_child(i).set_visible(true)

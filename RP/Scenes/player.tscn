@@ -1,9 +1,9 @@
-[gd_scene load_steps=38 format=3 uid="uid://8dk3qaprlcm0"]
+[gd_scene load_steps=39 format=3 uid="uid://8dk3qaprlcm0"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_0jjt7"]
 [ext_resource type="PackedScene" uid="uid://ddd86s453gb8j" path="res://Scenes/Weapons/shovel.tscn" id="2_ghos4"]
 [ext_resource type="Texture2D" uid="uid://b7c0n1yopsc63" path="res://Art/player.png" id="2_p18mr"]
-[ext_resource type="Texture2D" uid="uid://p8h5r1t8vnsk" path="res://Art/health.png" id="3_fbslf"]
+[ext_resource type="Texture2D" uid="uid://p8h5r1t8vnsk" path="res://Art/heart.png" id="3_fbslf"]
 [ext_resource type="AudioStream" uid="uid://wu1od6xq3lj5" path="res://Audio/Sfx/player_death.wav" id="5_cqsv5"]
 [ext_resource type="AudioStream" uid="uid://dbfupfc2qr86b" path="res://Audio/Sfx/player_hurt.wav" id="6_gg32s"]
 
@@ -237,11 +237,14 @@ size = Vector2(8, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ixd5i"]
 size = Vector2(10, 30)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hwlv4"]
+size = Vector2(10, 30)
+
 [node name="Player" type="CharacterBody2D"]
 top_level = true
 z_index = 1
 y_sort_enabled = true
-collision_layer = 12
+collision_layer = 44
 collision_mask = 15
 script = ExtResource("1_0jjt7")
 
@@ -256,9 +259,9 @@ shape = SubResource("RectangleShape2D_nqqvd")
 [node name="Camera2D2" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Hit_box" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hit_box"]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_ixd5i")
 
@@ -271,34 +274,57 @@ stream = ExtResource("5_cqsv5")
 stream = ExtResource("6_gg32s")
 
 [node name="HealthBar" type="HBoxContainer" parent="."]
-offset_left = -165.0
-offset_top = -105.0
-offset_right = -113.0
-offset_bottom = -64.0
+offset_right = 141.0
+offset_bottom = 20.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="Heart" type="Button" parent="HealthBar"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 icon = ExtResource("3_fbslf")
 flat = true
 
 [node name="Heart2" type="Button" parent="HealthBar"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 icon = ExtResource("3_fbslf")
 flat = true
 
 [node name="Heart3" type="Button" parent="HealthBar"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 icon = ExtResource("3_fbslf")
 flat = true
 
 [node name="Heart4" type="Button" parent="HealthBar"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 icon = ExtResource("3_fbslf")
 flat = true
 
 [node name="Heart5" type="Button" parent="HealthBar"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 icon = ExtResource("3_fbslf")
 flat = true
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[node name="Pickup_range" type="Area2D" parent="."]
+light_mask = 0
+visibility_layer = 0
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup_range"]
+light_mask = 0
+visibility_layer = 0
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_hwlv4")
+
+[connection signal="body_entered" from="Hit_box" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Pickup_range" to="." method="_on_pickup_range_body_entered"]
