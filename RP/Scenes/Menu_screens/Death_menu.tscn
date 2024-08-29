@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://d2pcb0ydhxaut"]
 
-[ext_resource type="Texture2D" uid="uid://cl2o8rx8oiqko" path="res://Art/Text/You_died.png" id="1_novc8"]
-[ext_resource type="Texture2D" uid="uid://n6teaqo5jns3" path="res://Art/Text/play_again.png" id="2_qetgr"]
-[ext_resource type="Script" path="res://Scripts/Buttons/Play.gd" id="3_ffj7o"]
-[ext_resource type="Texture2D" uid="uid://ck0ordy1iqvdy" path="res://Art/Text/quit.png" id="4_f8gpo"]
-[ext_resource type="Script" path="res://Scripts/Buttons/Quit.gd" id="5_mgr5i"]
-[ext_resource type="Texture2D" uid="uid://bp8dbc8kawflp" path="res://Art/Text/menu_background_color.png" id="6_4m7mt"]
+[ext_resource type="Texture2D" uid="uid://cl2o8rx8oiqko" path="res://Art/Text/You_died.png" id="1_455qi"]
+[ext_resource type="Texture2D" uid="uid://n6teaqo5jns3" path="res://Art/Text/play_again.png" id="2_usvqv"]
+[ext_resource type="Script" path="res://Scripts/Buttons/Play.gd" id="3_vcym0"]
+[ext_resource type="Texture2D" uid="uid://ck0ordy1iqvdy" path="res://Art/Text/quit.png" id="4_e64c1"]
+[ext_resource type="Script" path="res://Scripts/Buttons/Quit.gd" id="5_mfxjk"]
+[ext_resource type="Texture2D" uid="uid://bp8dbc8kawflp" path="res://Art/Text/menu_background_color.png" id="6_bvplo"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -25,25 +25,25 @@ alignment = 1
 
 [node name="You_died" type="Button" parent="Camera2D/VBoxContainer"]
 layout_mode = 2
-icon = ExtResource("1_novc8")
+icon = ExtResource("1_455qi")
 flat = true
 icon_alignment = 1
 
 [node name="Play_again" type="Button" parent="Camera2D/VBoxContainer"]
 layout_mode = 2
-icon = ExtResource("2_qetgr")
+icon = ExtResource("2_usvqv")
 flat = true
 icon_alignment = 1
-script = ExtResource("3_ffj7o")
+script = ExtResource("3_vcym0")
 
 [node name="Quit" type="Button" parent="Camera2D/VBoxContainer"]
 layout_mode = 2
-icon = ExtResource("4_f8gpo")
+icon = ExtResource("4_e64c1")
 flat = true
 icon_alignment = 1
-script = ExtResource("5_mgr5i")
+script = ExtResource("5_mfxjk")
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D"]
 show_behind_parent = true
 scale = Vector2(30.7, 15.3)
-texture = ExtResource("6_4m7mt")
+texture = ExtResource("6_bvplo")

@@ -24,37 +24,49 @@ func _physics_process(delta):
 	sprite.set_visible(false)
 	if Input.get_action_strength("Attack_up") == 1 and attacked == false and (down_a or left_a or right_a) != true:
 		attackU.set_disabled(false)
+		if attacking == false:
+			sprite.rotate(-sprite.get_rotation() + 1.5)
 		attacking = true
 		up_a = true
-		sprite.set_visible(true)
 		sprite.set_position(Vector2i(0, -15))
+		sprite.rotate(0.2)
+		sprite.set_visible(true)
 	else:
 		attackU.set_disabled(true)
 		
 	if Input.get_action_strength("Attack_down") == 1 and attacked == false and (up_a or left_a or right_a) != true:
 		attackD.set_disabled(false)
+		if attacking == false:
+			sprite.rotate(-sprite.get_rotation() + 2)
 		attacking = true
 		down_a = true
-		sprite.set_visible(true)
 		sprite.set_position(Vector2i(0, 15))
+		sprite.rotate(-0.2)
+		sprite.set_visible(true)
 	else:
 		attackD.set_disabled(true)
 				
 	if Input.get_action_strength("Attack_left") == 1 and attacked == false and (up_a or down_a or right_a) != true:
 		attackL.set_disabled(false)
+		if attacking == false:
+			sprite.rotate(-sprite.get_rotation() + 3.5)
 		attacking = true
 		left_a = true
-		sprite.set_visible(true)
 		sprite.set_position(Vector2i(-11, 0))
+		sprite.rotate(-0.2)
+		sprite.set_visible(true)
 	else:
 		attackL.set_disabled(true)
 			
 	if Input.get_action_strength("Attack_right") == 1 and attacked == false and (up_a or down_a or left_a) != true:
 		attackR.set_disabled(false)
+		if attacking == false:
+			sprite.rotate(-sprite.get_rotation() - 3.5)
 		attacking = true
 		right_a = true
-		sprite.set_visible(true)
 		sprite.set_position(Vector2i(11, 0))
+		sprite.rotate(0.2)
+		sprite.set_visible(true)
 	else:
 		attackR.set_disabled(true)
 		

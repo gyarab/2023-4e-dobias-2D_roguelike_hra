@@ -1,9 +1,9 @@
 [gd_scene load_steps=22 format=3 uid="uid://cahrom8sn4dku"]
 
 [ext_resource type="Script" path="res://Scripts/boss.gd" id="1_dgnsm"]
-[ext_resource type="Texture2D" uid="uid://druh4pqk0k0xq" path="res://Art/enemies/boss.png" id="2_d0qs8"]
-[ext_resource type="AudioStream" uid="uid://y55c6y1xg14s" path="res://Audio/Sfx/Boss_death.wav" id="3_gtiwp"]
-[ext_resource type="AudioStream" uid="uid://8oce3bcaae4c" path="res://Audio/Sfx/Enemy_hurt.wav" id="4_ugj6a"]
+[ext_resource type="Texture2D" uid="uid://druh4pqk0k0xq" path="res://Art/Enemies/boss.png" id="2_d0qs8"]
+[ext_resource type="AudioStream" uid="uid://y55c6y1xg14s" path="res://Audio/Sfx/boss_death.wav" id="3_gtiwp"]
+[ext_resource type="AudioStream" uid="uid://8oce3bcaae4c" path="res://Audio/Sfx/enemy_hurt.wav" id="4_ugj6a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_djkwo"]
 size = Vector2(63, 2)

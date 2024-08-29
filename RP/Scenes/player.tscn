@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://ddd86s453gb8j" path="res://Scenes/Weapons/shovel.tscn" id="2_ghos4"]
 [ext_resource type="Texture2D" uid="uid://b7c0n1yopsc63" path="res://Art/player.png" id="2_p18mr"]
 [ext_resource type="Texture2D" uid="uid://p8h5r1t8vnsk" path="res://Art/health.png" id="3_fbslf"]
-[ext_resource type="AudioStream" uid="uid://wu1od6xq3lj5" path="res://Audio/Sfx/Player_death.wav" id="5_cqsv5"]
-[ext_resource type="AudioStream" uid="uid://dbfupfc2qr86b" path="res://Audio/Sfx/Player_hurt.wav" id="6_gg32s"]
+[ext_resource type="AudioStream" uid="uid://wu1od6xq3lj5" path="res://Audio/Sfx/player_death.wav" id="5_cqsv5"]
+[ext_resource type="AudioStream" uid="uid://dbfupfc2qr86b" path="res://Audio/Sfx/player_hurt.wav" id="6_gg32s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mrqj8"]
 atlas = ExtResource("2_p18mr")
@@ -276,7 +276,7 @@ offset_top = -105.0
 offset_right = -113.0
 offset_bottom = -64.0
 
-[node name="Heart1" type="Button" parent="HealthBar"]
+[node name="Heart" type="Button" parent="HealthBar"]
 layout_mode = 2
 icon = ExtResource("3_fbslf")
 flat = true

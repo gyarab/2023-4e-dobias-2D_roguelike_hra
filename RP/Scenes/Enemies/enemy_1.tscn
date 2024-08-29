@@ -1,9 +1,9 @@
 [gd_scene load_steps=16 format=3 uid="uid://hhf5tkjirnq2"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_m7yb4"]
-[ext_resource type="AudioStream" uid="uid://dehqasm1kcubf" path="res://Audio/Sfx/Enemy_death.wav" id="3_k00j0"]
-[ext_resource type="Texture2D" uid="uid://chndj4y34quuv" path="res://Art/enemies/ghost.png" id="3_s2k7n"]
-[ext_resource type="AudioStream" uid="uid://8oce3bcaae4c" path="res://Audio/Sfx/Enemy_hurt.wav" id="4_t714e"]
+[ext_resource type="Texture2D" uid="uid://chndj4y34quuv" path="res://Art/Enemies/ghost.png" id="2_ck4r3"]
+[ext_resource type="AudioStream" uid="uid://dehqasm1kcubf" path="res://Audio/Sfx/enemy_death.wav" id="3_avyy1"]
+[ext_resource type="AudioStream" uid="uid://8oce3bcaae4c" path="res://Audio/Sfx/enemy_hurt.wav" id="4_s738k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6gk2e"]
 size = Vector2(14, 27)
@@ -17,27 +17,27 @@ radius = 423.001
 size = Vector2(27, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t5v0l"]
-atlas = ExtResource("3_s2k7n")
+atlas = ExtResource("2_ck4r3")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hmptl"]
-atlas = ExtResource("3_s2k7n")
+atlas = ExtResource("2_ck4r3")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l2e0v"]
-atlas = ExtResource("3_s2k7n")
+atlas = ExtResource("2_ck4r3")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1ke1j"]
-atlas = ExtResource("3_s2k7n")
+atlas = ExtResource("2_ck4r3")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dtfmb"]
-atlas = ExtResource("3_s2k7n")
+atlas = ExtResource("2_ck4r3")
 region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pcpri"]
-atlas = ExtResource("3_s2k7n")
+atlas = ExtResource("2_ck4r3")
 region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cbesx"]
@@ -107,10 +107,10 @@ shape = SubResource("RectangleShape2D_ioi3o")
 sprite_frames = SubResource("SpriteFrames_cbesx")
 
 [node name="Death_sound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_k00j0")
+stream = ExtResource("3_avyy1")
 
 [node name="Hit_sound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_t714e")
+stream = ExtResource("4_s738k")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

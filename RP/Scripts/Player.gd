@@ -5,13 +5,6 @@ var health = 5
 var health_start = health
 
 @onready var health_bar = $HealthBar
-
-@onready var heart1 = $HealthBar/Heart1
-@onready var heart2 = $HealthBar/Heart2
-@onready var heart3 = $HealthBar/Heart3
-@onready var heart4 = $HealthBar/Heart4
-@onready var heart5 = $HealthBar/Heart5
-
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var death_sound = $Death_sound
 @onready var hurt_sound = $Hurt_sound
