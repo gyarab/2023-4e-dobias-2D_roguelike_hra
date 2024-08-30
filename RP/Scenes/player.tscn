@@ -232,10 +232,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nqqvd"]
-size = Vector2(8, 12)
+size = Vector2(10, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ixd5i"]
-size = Vector2(10, 30)
+size = Vector2(12, 31)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwlv4"]
 size = Vector2(10, 30)
@@ -253,7 +253,7 @@ sprite_frames = SubResource("SpriteFrames_d2c2t")
 animation = &"idle"
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(0, 10)
+position = Vector2(0, 10.5)
 shape = SubResource("RectangleShape2D_nqqvd")
 
 [node name="Camera2D2" type="Camera2D" parent="."]
@@ -262,7 +262,7 @@ zoom = Vector2(2, 2)
 [node name="Hit_box" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hit_box"]
-position = Vector2(0, 2)
+position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_ixd5i")
 
 [node name="weapon" parent="." instance=ExtResource("2_ghos4")]
@@ -327,4 +327,4 @@ position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_hwlv4")
 
 [connection signal="body_entered" from="Hit_box" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="Pickup_range" to="." method="_on_pickup_range_body_entered"]
+[connection signal="body_exited" from="Pickup_range" to="." method="_on_pickup_range_body_exited"]

@@ -291,8 +291,15 @@ func _on_enemy_detector_body_entered(body):
 #function to keep track of how mny enemies are still alive
 func _on_enemy_detector_body_exited(body):
 	num_enemies -= 1
-	if randi_range(1, 5) == 1:
-		var heart = load("res://Scenes/Pickups/heart_pickup.tscn")
-		heart = heart.instantiate()
-		heart.position = body.position
-		add_child(heart)
+	var pickup = randi_range(1,2)
+	match pickup:
+		1:
+			var heart = load("res://Scenes/Pickups/heart_pickup.tscn")
+			heart = heart.instantiate()
+			heart.position = body.position
+			add_child(heart)
+		2:
+			var scroll = load("res://Scenes/Pickups/weapon_pickup.tscn")
+			scroll = scroll.instantiate()
+			scroll.position = body.position
+			add_child(scroll)

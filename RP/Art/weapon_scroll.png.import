@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cl2o8rx8oiqko"
-path="res://.godot/imported/you_died.png-6179bd001762ebc119b0447a2a7f8c34.ctex"
+uid="uid://bc0thpkpk8iu5"
+path="res://.godot/imported/weapon_scroll.png-bf4e89df731891c8617f53d92fc073e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Text/you_died.png"
-dest_files=["res://.godot/imported/you_died.png-6179bd001762ebc119b0447a2a7f8c34.ctex"]
+source_file="res://Art/weapon_scroll.png"
+dest_files=["res://.godot/imported/weapon_scroll.png-bf4e89df731891c8617f53d92fc073e7.ctex"]
 
 [params]
 

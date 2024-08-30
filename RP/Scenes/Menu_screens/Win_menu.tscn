@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://gvnxpmp18ql4"]
 
-[ext_resource type="Texture2D" uid="uid://ck8mtvcgmtxi2" path="res://Art/Text/You_win.png" id="1_jav3h"]
+[ext_resource type="Texture2D" uid="uid://ck8mtvcgmtxi2" path="res://Art/Text/you_win.png" id="1_jav3h"]
 [ext_resource type="Texture2D" uid="uid://n6teaqo5jns3" path="res://Art/Text/play_again.png" id="2_oxmwh"]
 [ext_resource type="Script" path="res://Scripts/Buttons/Play.gd" id="3_65clk"]
 [ext_resource type="Texture2D" uid="uid://ck0ordy1iqvdy" path="res://Art/Text/quit.png" id="4_0esnv"]

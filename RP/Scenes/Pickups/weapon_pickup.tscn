@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://byhso58kn1cpa"]
+
+[ext_resource type="Script" path="res://Scripts/Pickups/weapon_pickup.gd" id="1_hm2tn"]
+[ext_resource type="Texture2D" uid="uid://bc0thpkpk8iu5" path="res://Art/weapon_scroll.png" id="2_cact3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s20rv"]
+size = Vector2(12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tdgbb"]
+size = Vector2(12, 12)
+
+[node name="WeaponPickup" type="CharacterBody2D"]
+top_level = true
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("1_hm2tn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_cact3")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_s20rv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tdgbb")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

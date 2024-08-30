@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://d2pcb0ydhxaut"]
 
-[ext_resource type="Texture2D" uid="uid://cl2o8rx8oiqko" path="res://Art/Text/You_died.png" id="1_455qi"]
+[ext_resource type="Texture2D" uid="uid://cl2o8rx8oiqko" path="res://Art/Text/you_died.png" id="1_455qi"]
 [ext_resource type="Texture2D" uid="uid://n6teaqo5jns3" path="res://Art/Text/play_again.png" id="2_usvqv"]
 [ext_resource type="Script" path="res://Scripts/Buttons/Play.gd" id="3_vcym0"]
 [ext_resource type="Texture2D" uid="uid://ck0ordy1iqvdy" path="res://Art/Text/quit.png" id="4_e64c1"]

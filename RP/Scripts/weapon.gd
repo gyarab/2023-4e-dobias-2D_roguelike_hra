@@ -12,7 +12,8 @@ extends Node2D
 var attacked = false
 var attacking = false
 var attack_dur = 0.0
-var attack_cld = 0.0 #cld == cooldown
+var attack_cld = 0.3 #cld == cooldown
+var attack_cld_mem = attack_cld
 
 var up_a = false
 var down_a = false
@@ -81,12 +82,17 @@ func _physics_process(delta):
 		sprite.set_visible(false)
 	
 	if attacked == true:
-		attack_cld += delta
+		attack_cld -= delta
 		
-	if attack_cld >= 0.3:
+	if attack_cld <= 0.0:
 		attacked = false
-		attack_cld = 0.0
+		attack_cld = attack_cld_mem
 		up_a = false
 		down_a = false
 		left_a = false
 		right_a = false
+
+func _on_area_2d_5_body_exited(body):
+	await get_tree().create_timer(1).timeout
+	attack_cld_mem -= 0.05
+	print("a")

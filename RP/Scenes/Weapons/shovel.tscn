@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddd86s453gb8j"]
+[gd_scene load_steps=6 format=3 uid="uid://ddd86s453gb8j"]
 
 [ext_resource type="PackedScene" uid="uid://dyu174oi2prce" path="res://Scenes/weapon.tscn" id="1_y2gbb"]
 [ext_resource type="Texture2D" uid="uid://c8ja1osdd2imn" path="res://Art/Weapons/shovel.png" id="2_6lkyw"]
 [ext_resource type="AudioStream" uid="uid://drg2kiyhl5rvh" path="res://Audio/Sfx/weapon_swing.wav" id="3_c1pti"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jqhdo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uxa6k"]
 
 [node name="weapon" instance=ExtResource("1_y2gbb")]
 light_mask = 145
@@ -45,3 +49,23 @@ position = Vector2(11, 0)
 
 [node name="Weapon_swing" type="AudioStreamPlayer2D" parent="." index="5"]
 stream = ExtResource("3_c1pti")
+
+[node name="Area2D5" type="Area2D" parent="." index="6"]
+light_mask = 0
+visibility_layer = 0
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D5" index="0"]
+shape = SubResource("CircleShape2D_jqhdo")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." index="7"]
+light_mask = 0
+visibility_layer = 0
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" index="0"]
+shape = SubResource("CircleShape2D_uxa6k")
+
+[connection signal="body_exited" from="Area2D5" to="." method="_on_area_2d_5_body_exited"]
