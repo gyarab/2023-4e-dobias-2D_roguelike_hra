@@ -35,7 +35,6 @@ func _ready():
 func _physics_process(delta): #checks if doors should be open every frame
 	display_doors()
 	
-	
 #easier wait function
 func wait(sec):
 	await get_tree().create_timer(sec).timeout
@@ -291,14 +290,15 @@ func _on_enemy_detector_body_entered(body):
 #function to keep track of how mny enemies are still alive
 func _on_enemy_detector_body_exited(body):
 	num_enemies -= 1
-	var pickup = randi_range(1,10)
+	#code for spawning pickups
+	var pickup = randi_range(1,10) #handles the generation of chances
 	match pickup:
-		1:
+		1: #if the generated number is 1, spawns heart pickup 
 			var heart = load("res://Scenes/Pickups/heart_pickup.tscn")
 			heart = heart.instantiate()
-			heart.position = body.position
-			add_child(heart)
-		2:
+			heart.position = body.position # places the pickup in the place the enemy died
+			add_child(heart) # spawns the pickup
+		2: #if the generated number is 2, spawns weapon scroll pickup
 			var scroll = load("res://Scenes/Pickups/weapon_pickup.tscn")
 			scroll = scroll.instantiate()
 			scroll.position = body.position
