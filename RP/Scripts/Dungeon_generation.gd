@@ -291,7 +291,7 @@ func _on_enemy_detector_body_entered(body):
 #function to keep track of how mny enemies are still alive
 func _on_enemy_detector_body_exited(body):
 	num_enemies -= 1
-	var pickup = randi_range(1,2)
+	var pickup = randi_range(1,10)
 	match pickup:
 		1:
 			var heart = load("res://Scenes/Pickups/heart_pickup.tscn")
