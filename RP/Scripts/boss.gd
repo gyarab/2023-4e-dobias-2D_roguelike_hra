@@ -11,6 +11,7 @@ var hit_counter = 0
 var stun_duration = 3.0
 var stunned_timer = 0.0
 var hit_detector = true
+var stunned = false
 
 func _process(delta):
 	animated_sprite.play("default")
@@ -18,9 +19,11 @@ func _process(delta):
 func _physics_process(delta):
 	if hit_counter >= 7: # 7 == 5 ????
 		stunned_timer += delta
+		stunned = true
 		if stunned_timer >= stun_duration:
 			hit_counter = 0
 			stunned_timer = 0.0
+			stunned = false
 		return
 	else:
 		velocity = direction.normalized() * speed
@@ -63,8 +66,9 @@ func _on_right_body_exited(body):
 	hit_detector = true
 
 func _on_hb_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	health -= 1
-	hit_sound.play()
+	if stunned == true:
+		health -= 1
+		hit_sound.play()
 	if health == 0:
 		set_physics_process(false)
 		death_sound.play()

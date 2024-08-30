@@ -94,5 +94,6 @@ func _physics_process(delta):
 
 func _on_area_2d_5_body_exited(body):
 	await get_tree().create_timer(1).timeout
-	attack_cld_mem -= 0.05
+	if attack_cld_mem != 0:
+		attack_cld_mem -= 0.05
 	print("a")
